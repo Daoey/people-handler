@@ -7,10 +7,11 @@ import javafx.beans.property.StringProperty;
  * Description...
  *
  * 
- * @version 1.0 2015-11-02
+ * @version 1.1
  */
 public class PersonBean {
 	
+	private StringProperty name = new SimpleStringProperty();
 	private StringProperty firstName = new SimpleStringProperty() ;
 	private StringProperty lastName = new SimpleStringProperty() ;
 	private StringProperty email = new SimpleStringProperty() ;
@@ -27,6 +28,7 @@ public class PersonBean {
 		setEmail(email);
 		setGender(gender);
 		setAge(age);
+		setName(firstName, lastName);
 	}
 	
 	public final StringProperty firstNameProperty() {
@@ -40,7 +42,19 @@ public class PersonBean {
     public final void setFirstName(final String name) {
         this.firstNameProperty().set(name);
     }
-
+    
+    //name
+    public final StringProperty nameProperty(){
+    	return this.name;
+    }
+    
+    public final String getName(){
+    	return this.nameProperty().get();
+    }
+    
+    public final void setName(final String firstName, String lastName){
+    	this.nameProperty().set(firstName + " " + lastName);
+    }
 	
 	public final StringProperty lastNameProperty() {
         return this.lastName;

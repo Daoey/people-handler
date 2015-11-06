@@ -17,6 +17,7 @@
 	<target name= "compile">
 		<mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+        <copy file="${src.dir}/style.css" todir="${classes.dir}"/>
 	</target>
 
 	<target name="jar" depends="compile">

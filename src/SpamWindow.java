@@ -1,34 +1,32 @@
 import java.io.PrintWriter;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
-
-import javafx.application.*;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.*;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.stage.*;
+import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
-import javafx.scene.layout.*;
 
 /**
- * Description...
+ * This class creates an application that can manage people
  *
- * 
+ * @version 1.1
  */
 public class SpamWindow extends Application {
 
@@ -36,7 +34,11 @@ public class SpamWindow extends Application {
 	private ObservableList<PersonBean> personData = FXCollections.observableArrayList();
 	SortedList<PersonBean> sortedData = null;
 	FilteredList<PersonBean> filteredData = null;
-
+	
+	/**
+	 * Entry point of Application
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		System.out.println("Launching JavaFX application.");
@@ -46,6 +48,9 @@ public class SpamWindow extends Application {
 	}
 
 	// Override the init() method.
+	/**
+	 * This method loads the data needed for the application
+	 */
 	public void init() {
 		System.out.println("Inside the init() method.");
 		loadData();
@@ -83,6 +88,15 @@ public class SpamWindow extends Application {
 		table.setPrefWidth(500);
 
 		table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+		
+		TableColumn<PersonBean, String> nameCol = new TableColumn<PersonBean, String>("Full Name");
+		nameCol.setCellValueFactory(new PropertyValueFactory("name"));
+		nameCol.setCellFactory(TextFieldTableCell.<PersonBean> forTableColumn());
+		nameCol.setOnEditCommit((CellEditEvent<PersonBean, String> t) -> {
+			((PersonBean) t.getTableView().getItems().get(t.getTablePosition().getRow())).setFirstName(t.getNewValue());
+		});
+		
+		/*
 		TableColumn<PersonBean, String> firstNameCol = new TableColumn<PersonBean, String>("First Name");
 		firstNameCol.setCellValueFactory(new PropertyValueFactory("firstName"));
 		firstNameCol.setCellFactory(TextFieldTableCell.<PersonBean> forTableColumn());
@@ -96,6 +110,7 @@ public class SpamWindow extends Application {
 		lastNameCol.setOnEditCommit((CellEditEvent<PersonBean, String> t) -> {
 			((PersonBean) t.getTableView().getItems().get(t.getTablePosition().getRow())).setLastName(t.getNewValue());
 		});
+		*/
 		TableColumn<PersonBean, String> emailCol = new TableColumn<PersonBean, String>("Email");
 		emailCol.setCellValueFactory(new PropertyValueFactory("email"));
 		emailCol.setCellFactory(TextFieldTableCell.<PersonBean> forTableColumn());
@@ -114,8 +129,7 @@ public class SpamWindow extends Application {
 		ageCol.setOnEditCommit((CellEditEvent<PersonBean, Integer> t) -> {
 			((PersonBean) t.getTableView().getItems().get(t.getTablePosition().getRow())).setAge(t.getNewValue());
 		});
-		table.getColumns().setAll(firstNameCol, lastNameCol, emailCol, genderCol, ageCol);
-
+		table.getColumns().setAll(nameCol, emailCol, genderCol, ageCol);
 		
 		Button allButton = new Button("All");
 		allButton.setMinSize(100, 10);
@@ -199,7 +213,10 @@ public class SpamWindow extends Application {
 				removeButton);
 		// Create a scene.
 		Scene myScene = new Scene(rootNode, 800, 800);
-
+		
+		//set stylesheet
+		myScene.getStylesheets().add("style.css");
+		
 		// Set the scene on the stage.
 		myStage.setScene(myScene);
 
@@ -224,7 +241,7 @@ public class SpamWindow extends Application {
 	private void loadData() {
 		try {
 			//System.out.println(Paths.get("mydata.txt").toAbsolutePath());
-			List<String> lines = Files.readAllLines(Paths.get("mydata.txt"), Charset.defaultCharset());
+			List<String> lines = Files.readAllLines(Paths.get("mydata.txt"));//, Charset.defaultCharset());
 			String data[] = new String[5];
 			for (String line : lines) {
 				data = line.split(",");
