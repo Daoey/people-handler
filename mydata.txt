@@ -7,5 +7,5 @@ Ingemar,Stenmark,ingemar@baraaka.se,male,59
 Ingemar,Johansson,ingemar@champ.com,male,83
 Zlatan,Ibrahimovic,zlatan@psg.fr,make,35
 Carolina,Kluft,carro@friidrott.se,female,32
-Annika,Sorenstam,annika@golf.com,female,42
+Annika Sorenstam,Sorenstam,annika@golf.com,female,42
 Kajsa,Bergkvist,kajsa@hoppa.com,female,40

@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
 /**
- * This class creates an application that can manage people
+ * This class creates an application that manages people
  *
  * @version 1.1
  */
@@ -37,7 +37,7 @@ public class SpamWindow extends Application {
 	
 	/**
 	 * Entry point of Application
-	 * @param args
+	 * @param args	Not used
 	 */
 	public static void main(String[] args) {
 
@@ -72,6 +72,9 @@ public class SpamWindow extends Application {
 	}
 
 	// Override the start() method.
+	/**
+	 * This method creates the layout of the application
+	 */
 	public void start(Stage myStage) {
 
 		System.out.println("Inside the start() method.");
@@ -93,7 +96,7 @@ public class SpamWindow extends Application {
 		nameCol.setCellValueFactory(new PropertyValueFactory("name"));
 		nameCol.setCellFactory(TextFieldTableCell.<PersonBean> forTableColumn());
 		nameCol.setOnEditCommit((CellEditEvent<PersonBean, String> t) -> {
-			((PersonBean) t.getTableView().getItems().get(t.getTablePosition().getRow())).setFirstName(t.getNewValue());
+			((PersonBean) t.getTableView().getItems().get(t.getTablePosition().getRow())).setName(t.getNewValue());
 		});
 		
 		/*
@@ -231,11 +234,8 @@ public class SpamWindow extends Application {
 		}
 	}
 */
-	/** Description of loadDate())
+	/** This method reads data from mydata.txt and initializes an ObservableList with the people read.
 	 * 
-	 * @param a			Description of a
-	 * @param b			Description of b
-	 * @return			Description of c
 	 */
 
 	private void loadData() {
@@ -257,14 +257,17 @@ public class SpamWindow extends Application {
 		}
 		
 	}
-
+	
+	/**
+	 * This method saves the changes made to the people list
+	 */
 	private void writeIt() {
 		try {
 			PrintWriter writer = new PrintWriter("mydata.txt", "UTF-8");
 			Iterator<PersonBean> it = personData.iterator();
 			while (it.hasNext()) {
 				PersonBean p = it.next();
-				writer.println(p.getFirstName() + "," + p.getLastName() + "," + p.getEmail() + "," + p.getGender() + "," + p.getAge());
+				writer.println(p.getName() + "," + p.getEmail() + "," + p.getGender() + "," + p.getAge());
 			}
 			writer.close();
 		} catch (Exception e) {
@@ -272,30 +275,50 @@ public class SpamWindow extends Application {
 		}
 	}
 
-
+	/**
+	 * This method adds a new person to the observable list.
+	 */
 	private void addRow() {
 		System.out.println("new row.");
 		personData.add(new PersonBean());
 	}
-
+	
+	/** This method makes it so the table displays everything.
+	 * 
+	 * @return	Always returns true
+	 */
 	public static Predicate<PersonBean> showAll() {
 		return p -> true;
 	}
 	
-	
+	/**This method makes it so the table only display males.
+	 * 
+	 * @return	True if male, false otherwise
+	 */
 	public static Predicate<PersonBean> isMale() {
 		return p -> p.getGender().equalsIgnoreCase("Male");
 	}
 
+	/**This method makes it so the table only display females.
+	 * 
+	 * @return	True if female, false otherwise
+	 */
 	public static Predicate<PersonBean> isFemale() {
 		return p -> p.getGender().equalsIgnoreCase("Female");
 	}
-
+	
+	/**This method makes it so the table only display people over 18 year.
+	 * 
+	 * @return 	True if 18 or older, false otherwise
+	 */
 	public static Predicate<PersonBean> over18() {
 		return p -> p.getAge() > 17;
 	}
 
 	// Override the stop() method.
+	/**
+	 * This method makes the appropriate shutdown saves.
+	 */
 	public void stop() {
 		System.out.println("Inside the stop() method.");
 		writeIt();
