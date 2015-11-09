@@ -1,3 +1,5 @@
+package johan.asling.ju15.javafx;
+
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -5,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +25,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+import johan.asling.ju15.beans.PersonBean;
 
 /**
  * This class creates an application that manages people
@@ -241,7 +245,7 @@ public class SpamWindow extends Application {
 	private void loadData() {
 		try {
 			//System.out.println(Paths.get("mydata.txt").toAbsolutePath());
-			List<String> lines = Files.readAllLines(Paths.get("mydata.txt"));//, Charset.defaultCharset());
+			List<String> lines = Files.readAllLines(Paths.get("src/johan/asling/ju15/utils/mydata.txt"));//, Charset.defaultCharset());
 			String data[] = new String[5];
 			for (String line : lines) {
 				data = line.split(",");
@@ -263,7 +267,7 @@ public class SpamWindow extends Application {
 	 */
 	private void writeIt() {
 		try {
-			PrintWriter writer = new PrintWriter("mydata.txt", "UTF-8");
+			PrintWriter writer = new PrintWriter("src/johan/asling/ju15/utils/mydata.txt", "UTF-8");
 			Iterator<PersonBean> it = personData.iterator();
 			while (it.hasNext()) {
 				PersonBean p = it.next();

@@ -8,7 +8,7 @@
     <property name="jar.dir"     value="${build.dir}/jar"/>
     <property name="doc.dir"	 value="doc"/>
 
-    <property name="main-class"  value="SpamWindow"/>
+    <property name="main-class"  value="johan.asling.ju15.javafx.SpamWindow"/>
 
 	<target name= "clean">
 		<delete dir="${build.dir}"/>
@@ -17,7 +17,7 @@
 	<target name= "compile">
 		<mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
-        <copy file="${src.dir}/style.css" todir="${classes.dir}"/>
+        <copy file="${src.dir}/johan/asling/ju15/utils/style.css" todir="${classes.dir}"/>
 	</target>
 
 	<target name="jar" depends="compile">

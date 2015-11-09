@@ -2,10 +2,8 @@ Pelle,Olsson,pelle@io.com,male,23
 Per,Karlsson,per@hotmail.com,male,44
 Anna,Svensson,anna@gmail.com,female,17
 Ricky,Bruch,ricky@diskus.se,Male,70
-Linda,Haglund,linda@springfort.se,Female,59
+Lena,Haglund,linda@springfort.se,Female,59
 Ingemar,Stenmark,ingemar@baraaka.se,male,59
 Ingemar,Johansson,ingemar@champ.com,male,83
-Zlatan,Ibrahimovic,zlatan@psg.fr,make,35
+Zlatan,Ibrahimovic,zlatan@psg.fr,male,35
 Carolina,Kluft,carro@friidrott.se,female,32
-Annika Sorenstam,Sorenstam,annika@golf.com,female,42
-Kajsa,Bergkvist,kajsa@hoppa.com,female,40

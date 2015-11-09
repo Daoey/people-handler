@@ -5,5 +5,5 @@ To run
 
 Import project into eclipse
 OR
-Run with Ant
+Run with Ant	- ant run
 ------------------------------------------------------------

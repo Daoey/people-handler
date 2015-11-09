@@ -1,3 +1,5 @@
+package johan.asling.ju15.beans;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
