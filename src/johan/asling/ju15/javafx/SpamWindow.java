@@ -1,5 +1,6 @@
 package johan.asling.ju15.javafx;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -245,7 +246,14 @@ public class SpamWindow extends Application {
 	private void loadData() {
 		try {
 			//System.out.println(Paths.get("mydata.txt").toAbsolutePath());
-			List<String> lines = Files.readAllLines(Paths.get("src/johan/asling/ju15/utils/mydata.txt"));//, Charset.defaultCharset());
+			List<String> lines;
+			File f = new File("src/johan/asling/ju15/utils/mydata.txt");
+			if(f.exists() && !f.isDirectory()) { 
+				lines = Files.readAllLines(Paths.get("src/johan/asling/ju15/utils/mydata.txt"));//, Charset.defaultCharset());
+			}
+			else{
+				lines = Files.readAllLines(Paths.get("mydata.txt"));
+			}
 			String data[] = new String[5];
 			for (String line : lines) {
 				data = line.split(",");
